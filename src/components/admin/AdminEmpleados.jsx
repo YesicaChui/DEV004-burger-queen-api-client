@@ -1,11 +1,12 @@
 import { NavAdmin } from "./NavAdmin"
 
-export const AdminEmpleados = () => {
+export const AdminEmpleados = ({token}) => {  
+
   return (
     <>
       <NavAdmin />
       <section className="container p-3">
-        <h2 className="text-center mb-4">Agregar Empleados</h2>
+        <h2 className="text-center mb-4">Agregar Empleados </h2>
         <div className="row">
           <div className="col-lg-6 mx-auto">
             <form className="bg-dark p-3 rounded">
