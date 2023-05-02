@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+// https://ultimatecourses.com/blog/programmatically-navigate-react-router
 // Componente login
 export const Login = () => {
+  const navigate = useNavigate();
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
-  const logearse = () => {
+  const inputUsuario =useRef(null)
+  const logearse = (usuario,contrasena) => {
+    console.log(`valor capturado desde el ref ${inputUsuario.current.value}`)
     console.log('Correo Usuario:', usuario);
     console.log('Contraseña:', contrasena);
     axios.post("http://localhost:8080/login", {
@@ -17,7 +22,12 @@ export const Login = () => {
     })
       .then(response => {
         console.log(response.data)
-        alert("Login Exitoso")
+        console.log(response.data.user.role)
+        //alert("Login Exitoso")
+        if(response.data.user.role === 'admin')  return navigate('/admin');
+        if(response.data.user.role === 'chef')  return navigate('/cocina');
+        if(response.data.user.role === 'waiter')  return navigate('/mesera');
+
       })
       // si el codigo es de 400 para arriba
       .catch(error => {
@@ -31,7 +41,8 @@ export const Login = () => {
         <div className="mb-3">
           <label htmlFor="inputUsuario" className="form-label">Correo de Usuario</label>
           <input
-            id="inputUsuario"
+            id="inputUsuario" 
+            ref={inputUsuario}
             type="text"
             className="form-control" placeholder="Correo de Usuario"
             value={usuario}
@@ -49,7 +60,7 @@ export const Login = () => {
             onChange={(e) => setContrasena(e.target.value)}
           />
         </div>
-        <button type="button" className="btn btn-primary" onClick={logearse}>Ingresar</button>
+        <button type="button" className="btn btn-primary" onClick={()=>logearse(usuario,contrasena)}>Ingresar</button>
       </form>
     </>
   )
