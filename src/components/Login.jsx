@@ -7,8 +7,8 @@ export const Login = () => {
   const navigate = useNavigate();
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
-  const inputUsuario =useRef(null)
-  const logearse = (usuario,contrasena) => {
+  const inputUsuario = useRef(null)
+  const logearse = (usuario, contrasena) => {
     console.log(`valor capturado desde el ref ${inputUsuario.current.value}`)
     console.log('Correo Usuario:', usuario);
     console.log('Contraseña:', contrasena);
@@ -24,9 +24,9 @@ export const Login = () => {
         console.log(response.data)
         console.log(response.data.user.role)
         //alert("Login Exitoso")
-        if(response.data.user.role === 'admin')  return navigate('/admin/empleados');
-        if(response.data.user.role === 'chef')  return navigate('/cocina');
-        if(response.data.user.role === 'waiter')  return navigate('/mesera');
+        if (response.data.user.role === 'admin') return navigate('/admin/empleados');
+        if (response.data.user.role === 'chef') return navigate('/cocina');
+        if (response.data.user.role === 'waiter') return navigate('/mesera');
 
       })
       // si el codigo es de 400 para arriba
@@ -37,18 +37,20 @@ export const Login = () => {
   }
   return (
     <>
-      <form className="mt-5">
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-dark">
+      <form className="p-5 rounded shadow-lg bg-light">
+        <h1 className="text-center mb-4">Burger Queen Login</h1>
         <div className="mb-3">
           <label htmlFor="inputUsuario" className="form-label">Correo de Usuario</label>
           <input
-            id="inputUsuario" 
+            id="inputUsuario"
             ref={inputUsuario}
             type="text"
-            className="form-control" placeholder="Correo de Usuario"
+            className="form-control"
+            placeholder="Correo de Usuario"
             value={usuario}
             onChange={(e) => setUsuario(e.target.value)}
           />
-
         </div>
         <div className="mb-3">
           <label htmlFor="inputPassword" className="form-label">Contraseña</label>
@@ -60,8 +62,11 @@ export const Login = () => {
             onChange={(e) => setContrasena(e.target.value)}
           />
         </div>
-        <button type="button" className="btn btn-primary" onClick={()=>logearse(usuario,contrasena)}>Ingresar</button>
+        <div className="d-grid gap-2">
+          <button type="button" className="btn btn-primary" onClick={() => logearse(usuario, contrasena)}>Ingresar</button>
+        </div>
       </form>
-    </>
+    </div>
+  </>
   )
 }
