@@ -4,6 +4,8 @@ import App from './App.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Login } from './components/Login.jsx'
+import { AdminEmpleados } from './components/admin/AdminEmpleados.jsx'
+import { AdminProductos } from './components/admin/AdminProductos.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,8 +21,12 @@ const router = createBrowserRouter([
     element:<h1>Cocina</h1>
   },
   {
-    path: "/admin",
-    element:<h1>Admnistracion</h1>
+    path: "/admin/empleados",
+    element:<AdminEmpleados/>
+  },
+  {
+    path: "/admin/productos",
+    element:<AdminProductos/>
   },
 ])
 

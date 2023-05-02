@@ -24,7 +24,7 @@ export const Login = () => {
         console.log(response.data)
         console.log(response.data.user.role)
         //alert("Login Exitoso")
-        if(response.data.user.role === 'admin')  return navigate('/admin');
+        if(response.data.user.role === 'admin')  return navigate('/admin/empleados');
         if(response.data.user.role === 'chef')  return navigate('/cocina');
         if(response.data.user.role === 'waiter')  return navigate('/mesera');
 
