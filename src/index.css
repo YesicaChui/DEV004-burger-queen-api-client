@@ -74,5 +74,6 @@ button:focus-visible {
  }
 
  .imgProducto{
-  width: 40px;
+  width: 75%;
+  max-width: 80px;
  }

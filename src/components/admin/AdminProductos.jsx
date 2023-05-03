@@ -134,7 +134,7 @@ export const AdminProductos = ({ token }) => {
                   <tr key={producto.id}>
                     <td>{producto.name}</td>
                     <td>{producto.price}</td>
-                    <td><img src={producto.image} alt="Imagen del producto" className="w-75"/></td>
+                    <td><img src={producto.image} alt="Imagen del producto" className="imgProducto"/></td>
                     <td>{producto.type}</td>
                     <td>
                       <button className="btn btn-warning btn-sm me-2" onClick={() => activarEdicionProducto(producto.id,producto.name,producto.price, producto.image, producto.type)}>Editar</button>
