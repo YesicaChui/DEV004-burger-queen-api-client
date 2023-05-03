@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavAdmin } from "./NavAdmin"
-import {  httpCrearEmpleado, httpEliminarEmpleado,httpActualizarEmpleado, httpObtenerProductos, httpCrearProducto, httpEliminarProducto } from "../../api/api";
+import {  httpCrearEmpleado, httpEliminarEmpleado,httpActualizarEmpleado, httpObtenerProductos, httpCrearProducto, httpEliminarProducto, httpActualizarProducto } from "../../api/api";
 
 export const AdminProductos = ({ token }) => {
  
@@ -27,8 +27,8 @@ export const AdminProductos = ({ token }) => {
       const data = await httpCrearProducto(token, producto)
       alert("Se inserto el producto con exito")
     } else {
-      await httpActualizarEmpleado(token, usuario,idEdit)
-      alert("Se actualizo los datos del empleado con exito")
+      await httpActualizarProducto(token, producto,idEdit)
+      alert("Se actualizo los datos del producto con exito")
     }
     cancelarEdicion()
     await leerProductos()
@@ -46,12 +46,14 @@ export const AdminProductos = ({ token }) => {
     await leerProductos()
   }
 
-  async function activarEdicionEmpleado(id,correo,rol) {
+  async function activarEdicionProducto(id,nombre,precio,imagen,tipo) {
     scrollTo(0, 0);
     setIsEdit(true)
     setIdEdit(id)
-    setCorreo(correo)
-    setRol(rol)
+    setNombre(nombre)
+    setPrecio(precio)
+    setImagen(imagen)
+    setTipo(tipo)
   }
 
   function cancelarEdicion() {
@@ -135,7 +137,7 @@ export const AdminProductos = ({ token }) => {
                     <td><img src={producto.image} alt="Imagen del producto" className="w-75"/></td>
                     <td>{producto.type}</td>
                     <td>
-                      <button className="btn btn-warning btn-sm me-2" onClick={() => activarEdicionEmpleado(empleado.id,empleado.email,empleado.role)}>Editar</button>
+                      <button className="btn btn-warning btn-sm me-2" onClick={() => activarEdicionProducto(producto.id,producto.name,producto.price, producto.image, producto.type)}>Editar</button>
                       <button className="btn btn-danger btn-sm" onClick={() => eliminarProducto(producto.id)}>Eliminar</button>
                     </td>
                   </tr>

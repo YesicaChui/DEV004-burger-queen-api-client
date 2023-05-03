@@ -93,3 +93,17 @@ export async function httpEliminarProducto(token, id) {
     console.log(error);
   }
 }
+
+export async function httpActualizarProducto(token, producto,id) {
+  try {
+    const response = await axios.patch(`http://localhost:8080/products/${id}`, producto, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
