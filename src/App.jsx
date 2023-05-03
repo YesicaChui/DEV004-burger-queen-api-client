@@ -32,7 +32,7 @@ function App() {
     },
     {
       path: "/admin/productos",
-      element:<AdminProductos/>
+      element:<AdminProductos token={token}/>
     },
   ])
   return (

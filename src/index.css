@@ -72,3 +72,7 @@ button:focus-visible {
  ul>li:hover{
   background-color: cyan;
  }
+
+ .imgProducto{
+  width: 40px;
+ }
