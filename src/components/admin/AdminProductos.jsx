@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavAdmin } from "./NavAdmin"
-import {  httpCrearEmpleado, httpEliminarEmpleado,httpActualizarEmpleado, httpObtenerProductos, httpCrearProducto } from "../../api/api";
+import {  httpCrearEmpleado, httpEliminarEmpleado,httpActualizarEmpleado, httpObtenerProductos, httpCrearProducto, httpEliminarProducto } from "../../api/api";
 
 export const AdminProductos = ({ token }) => {
  
@@ -38,12 +38,12 @@ export const AdminProductos = ({ token }) => {
     setProductos(await httpObtenerProductos(token))
   }
 
-  async function eliminarEmpleado(id) {
+  async function eliminarProducto(id) {
     console.log(id)
-    if (!confirm('¿Estás seguro de que deseas eliminar al empleado?')) return
-    const respuesta = await httpEliminarEmpleado(token, id)
+    if (!confirm('¿Estás seguro de que deseas eliminar el producto?')) return
+    const respuesta = await httpEliminarProducto(token, id)
     console.log(`mirespuesta ${respuesta.status}`)
-    await leerEmpleados()
+    await leerProductos()
   }
 
   async function activarEdicionEmpleado(id,correo,rol) {
@@ -136,7 +136,7 @@ export const AdminProductos = ({ token }) => {
                     <td>{producto.type}</td>
                     <td>
                       <button className="btn btn-warning btn-sm me-2" onClick={() => activarEdicionEmpleado(empleado.id,empleado.email,empleado.role)}>Editar</button>
-                      <button className="btn btn-danger btn-sm" onClick={() => eliminarEmpleado(empleado.id)}>Eliminar</button>
+                      <button className="btn btn-danger btn-sm" onClick={() => eliminarProducto(producto.id)}>Eliminar</button>
                     </td>
                   </tr>
                 ))}

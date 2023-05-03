@@ -80,3 +80,16 @@ export async function httpCrearProducto(token, producto) {
     console.log(error);
   }
 }
+
+export async function httpEliminarProducto(token, id) {
+  try {
+    const response = await axios.delete(`http://localhost:8080/products/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
