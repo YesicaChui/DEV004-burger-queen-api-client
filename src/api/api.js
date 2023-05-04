@@ -1,4 +1,22 @@
 import axios from "axios";
+
+export async function httpLogin(usuario, contrasena) {
+  try {
+    const response = await axios.post(`http://localhost:8080/login`, {
+      "email": usuario,
+      "password": contrasena
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    return "error";
+  }
+}
+
+
 export async function httpObtenerEmpleados(token) {
   try {
     const response = await axios.get("http://localhost:8080/users", {

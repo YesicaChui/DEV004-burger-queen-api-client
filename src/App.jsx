@@ -8,9 +8,7 @@ function App() {
 
   const [token, setToken]=useState('')
 
-  function actualizarToken(miToken){
-    setToken(miToken)
-  }
+  const actualizarToken = (miToken) => setToken(miToken)
 
   const router = createBrowserRouter([
     {
@@ -37,8 +35,7 @@ function App() {
   ])
   return (
     <>
-        <RouterProvider router={router}/>
-     
+        <RouterProvider router={router}/>     
     </>
   )
 }

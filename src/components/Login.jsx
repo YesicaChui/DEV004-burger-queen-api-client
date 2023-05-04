@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { httpLogin } from '../api/api';
 // https://ultimatecourses.com/blog/programmatically-navigate-react-router
 // Componente login
 export const Login = ({actualizarToken}) => {
@@ -8,31 +9,16 @@ export const Login = ({actualizarToken}) => {
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
   const inputUsuario = useRef(null)
-  const logearse = (usuario, contrasena) => {
-    axios.post("http://localhost:8080/login", {
-      "email": usuario,
-      "password": contrasena
-    }, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        console.log(response.data)
-        console.log(response.data.user.role)
-        actualizarToken(response.data.accessToken)
-
-        //alert("Login Exitoso")
-        if (response.data.user.role === 'admin') return navigate('/admin/empleados');
-        if (response.data.user.role === 'chef') return navigate('/cocina');
-        if (response.data.user.role === 'waiter') return navigate('/mesera');
-
-      })
-      // si el codigo es de 400 para arriba
-      .catch(error => {
-        console.log(error)
-        alert("Email o contraseña incorrectos Verifique porfavor")
-      })
+  const logearse = async (usuario, contrasena) => {
+    try{
+      const data = await httpLogin(usuario,contrasena)
+      actualizarToken(data.accessToken)
+      if (data.user.role === 'admin') return navigate('/admin/empleados');
+      if (data.user.role === 'chef') return navigate('/cocina');
+      if (data.user.role === 'waiter') return navigate('/mesera');
+    }catch(error){
+      alert("Email o contraseña incorrectos Verifique porfavor")
+    }  
   }
   
   return (
