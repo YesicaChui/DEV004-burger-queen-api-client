@@ -118,7 +118,7 @@ export const AdminEmpleados = ({ token }) => {
                 </tr>
               </thead>
               <tbody>
-                {empleados.map((empleado) => (
+                {empleados?.map((empleado) => (
                   <tr key={empleado.id}>
                     <td>{empleado.email}</td>
                     <td>{empleado.role}</td>
