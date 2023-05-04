@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { httpLogin } from '../api/api';
 // https://ultimatecourses.com/blog/programmatically-navigate-react-router
@@ -8,7 +7,6 @@ export const Login = ({actualizarToken}) => {
   const navigate = useNavigate();
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
-  const inputUsuario = useRef(null)
   const logearse = async (usuario, contrasena) => {
     try{
       const data = await httpLogin(usuario,contrasena)
@@ -30,7 +28,6 @@ export const Login = ({actualizarToken}) => {
           <label htmlFor="inputUsuario" className="form-label">Correo de Usuario</label>
           <input
             id="inputUsuario"
-            ref={inputUsuario}
             type="text"
             className="form-control"
             placeholder="Correo de Usuario"
