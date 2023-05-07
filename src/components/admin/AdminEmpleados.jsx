@@ -11,13 +11,13 @@ export const AdminEmpleados = ({ token }) => {
   const [contrasena, setContrasena]=useState("")
   async function guardarEmpleado(e) {
     e.preventDefault();
-    if (!e.target.elements.correo.value) return alert("Debe ingresar su correo")
-    if (!e.target.elements.contrasena.value) return alert("Debe ingresar una contraseña")
-    if (!e.target.elements.rol.value) return alert("Debe seleccionar un rol")
+    if (!correo) return alert("Debe ingresar su correo")
+    if (!contrasena) return alert("Debe ingresar una contraseña")
+    if (!rol) return alert("Debe seleccionar un rol")
     const usuario = {
-      "email": e.target.elements.correo.value,
-      "password": e.target.elements.contrasena.value,
-      "role": e.target.elements.rol.value
+      "email": correo,
+      "password": contrasena,
+      "role": rol
     }
     if (!isEdit) {
       const data = await httpCrearEmpleado(token, usuario)

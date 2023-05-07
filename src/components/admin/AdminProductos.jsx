@@ -13,15 +13,15 @@ export const AdminProductos = ({ token }) => {
   const [imagen, setImagen]=useState("")
   async function guardarProducto(e) {
     e.preventDefault();
-    if (!e.target.elements.nombre.value) return alert("Debe ingresar un nombre")
-    if (!e.target.elements.precio.value) return alert("Debe ingresar un precio")
-    if (!e.target.elements.imagen.value) return alert("Debe seleccionar una url de imagen")
-    if (!e.target.elements.tipo.value) return alert("Debe seleccionar un tipo")
+    if (!nombre) return alert("Debe ingresar un nombre")
+    if (!precio) return alert("Debe ingresar un precio")
+    if (!imagen) return alert("Debe seleccionar una url de imagen")
+    if (!tipo) return alert("Debe seleccionar un tipo")
     const producto = {
-      "name": e.target.elements.nombre.value,
-      "price": e.target.elements.precio.value,
-      "image": e.target.elements.imagen.value,
-      "type": e.target.elements.tipo.value
+      "name": nombre,
+      "price": precio,
+      "image": imagen,
+      "type": tipo
     }
     if (!isEdit) {
       const data = await httpCrearProducto(token, producto)
