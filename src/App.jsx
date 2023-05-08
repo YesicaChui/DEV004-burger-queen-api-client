@@ -3,6 +3,8 @@ import { Login } from './components/Login.jsx'
 import { AdminEmpleados } from './components/admin/AdminEmpleados.jsx'
 import { AdminProductos } from './components/admin/AdminProductos.jsx'
 import { useState } from 'react'
+import { Pedidos } from './components/Mozo/Pedidos.jsx'
+import { ListaPedidos } from './components/Mozo/ListaPedidos.jsx'
 function App() {
 
   // variable de estado donde guardare el token para usar las rutas del backend
@@ -22,8 +24,12 @@ function App() {
       errorElement:<h1>error ruta</h1>
     },
     {
-      path: "/mesera",
-      element:<h1>Mozo/a</h1>
+      path: "/mozo/pedidos",
+      element:<Pedidos/>
+    },
+    {
+      path: "/mozo/lista_pedidos",
+      element:<ListaPedidos/>
     },
     {
       path: "/cocina",

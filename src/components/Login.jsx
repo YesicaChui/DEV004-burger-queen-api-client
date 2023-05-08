@@ -13,7 +13,7 @@ export const Login = ({ actualizarToken }) => {
       actualizarToken(data.accessToken)
       if (data.user.role === 'admin') return navigate('/admin/empleados');
       if (data.user.role === 'chef') return navigate('/cocina');
-      if (data.user.role === 'waiter') return navigate('/mesera');
+      if (data.user.role === 'waiter') return navigate('/mozo/pedidos');
     } catch (error) {
       alert("Email o contraseña incorrectos Verifique porfavor")
     }
