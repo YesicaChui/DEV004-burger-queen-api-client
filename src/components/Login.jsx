@@ -12,7 +12,7 @@ export const Login = ({ actualizarToken }) => {
       const data = await httpLogin(usuario, contrasena)
       actualizarToken(data.accessToken)
       if (data.user.role === 'admin') return navigate('/admin/empleados');
-      if (data.user.role === 'chef') return navigate('/cocina');
+      if (data.user.role === 'chef') return navigate('/cocina/pendientes');
       if (data.user.role === 'waiter') return navigate('/mozo/pedidos');
     } catch (error) {
       alert("Email o contraseña incorrectos Verifique porfavor")

@@ -5,6 +5,8 @@ import { AdminProductos } from './components/admin/AdminProductos.jsx'
 import { useState } from 'react'
 import { Pedidos } from './components/Mozo/Pedidos.jsx'
 import { ListaPedidos } from './components/Mozo/ListaPedidos.jsx'
+import { Pendientes } from './components/Cocina/Pendientes.jsx'
+import { Completadas } from './components/Cocina/Completadas.jsx'
 function App() {
 
   // variable de estado donde guardare el token para usar las rutas del backend
@@ -32,8 +34,12 @@ function App() {
       element:<ListaPedidos/>
     },
     {
-      path: "/cocina",
-      element:<h1>Cocina de karen</h1>
+      path: "/cocina/pendientes",
+      element:<Pendientes/>
+    },
+    {
+      path: "/cocina/completadas",
+      element:<Completadas/>
     },
     {
       //ruta de navegación
