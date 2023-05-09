@@ -2,7 +2,8 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { NavAdmin } from '../src/components/admin/NavAdmin';
 import { BrowserRouter } from 'react-router-dom';
-
+// testing de componentes
+// https://www.youtube.com/watch?v=FjJu3hcPSCY&ab_channel=Garajedeideas
 describe('NavAdmin', () => {
   it('Deberia de renderizar el componente correctamente', () => {
     // simulo el dibujo del componente
@@ -11,13 +12,13 @@ describe('NavAdmin', () => {
         <NavAdmin />
       </BrowserRouter>
     );
-
+    // se renderiza correctamente si estan los siguientes 4 textos
     const adminBrand = getByText('ADMINISTRACIÓN');
     const empleadosLink = getByText('Empleados');
     const productosLink = getByText('Productos');
     const salirLink = getByText('Salir');
 
-    // si esta en el documento los 4 textos pasa el test
+    // Verifico si esta en el documento los 4 textos para pasar el test
     expect(adminBrand).toBeInTheDocument();
     expect(empleadosLink).toBeInTheDocument();
     expect(productosLink).toBeInTheDocument();

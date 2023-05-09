@@ -65,12 +65,7 @@ export const AdminProductos = ({ token }) => {
   }
 
   //la primera vez que se llame al componente cargo los datos de los empleados
-  useEffect(() => {
-    const leer = async () => {
-      await leerProductos();
-    };
-    leer();
-  }, [])
+  useEffect(() => leerProductos() , [])
 
 
   return (
