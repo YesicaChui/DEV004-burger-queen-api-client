@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavAdmin } from "./NavAdmin"
-import {  httpCrearEmpleado, httpEliminarEmpleado,httpActualizarEmpleado, httpObtenerProductos, httpCrearProducto, httpEliminarProducto, httpActualizarProducto } from "../../api/api";
+import {  httpObtenerProductos, httpCrearProducto, httpEliminarProducto, httpActualizarProducto } from "../../api/api";
 
 export const AdminProductos = ({ token }) => {
  
@@ -130,7 +130,7 @@ export const AdminProductos = ({ token }) => {
                 </tr>
               </thead>
               <tbody>
-                {productos.map((producto) => (
+                {productos?.map((producto) => (
                   <tr key={producto.id}>
                     <td>{producto.name}</td>
                     <td>{producto.price}</td>

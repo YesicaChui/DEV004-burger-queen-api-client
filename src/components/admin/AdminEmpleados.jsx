@@ -19,9 +19,11 @@ export const AdminEmpleados = ({ token }) => {
       "password": contrasena,
       "role": rol
     }
+    // si no estoy editando creo el empleado
     if (!isEdit) {
       const data = await httpCrearEmpleado(token, usuario)
       alert("Se inserto al empleado con exito")
+      //caso contrario actualizo el empleado
     } else {
       await httpActualizarEmpleado(token, usuario,idEdit)
       alert("Se actualizo los datos del empleado con exito")

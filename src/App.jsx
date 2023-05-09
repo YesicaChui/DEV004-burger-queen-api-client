@@ -27,7 +27,7 @@ function App() {
     },
     {
       path: "/mozo/pedidos",
-      element:<Pedidos/>
+      element:<Pedidos token={token}/>
     },
     {
       path: "/mozo/lista_pedidos",

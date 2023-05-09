@@ -1,47 +1,45 @@
 import React from 'react'
+import { useEffect, useState } from "react";
 import { NavMozo } from './NavMozo'
 import coffee from '../../assets/coffee.png'
+import { httpObtenerProductos } from "../../api/api";
 
-export const Pedidos = () => {
+export const Pedidos = ({ token }) => {
+  const [productos, setProductos] = useState([])
+  async function leerProductos() {
+    setProductos(await httpObtenerProductos(token))
+  }
+  //la primera vez que se llame al componente cargo los datos de los empleados
+  useEffect(() => {
+    const leer = async () => {
+      await leerProductos();
+    };
+    leer();
+  }, [])
   return (
     <>
       <NavMozo />
       <div className="container">
         <main className="d-flex justify-content-between">
           <section className="productos-orden d-flex justify-content-between flex-wrap col-6">
-            <article className="card mx-auto text-center align-self-start mt-2 ">
-              <img className="imgProductoMediano mx-auto mt-2" src={coffee} alt="" />
-              <div className="card-body">
-                <h5 className="card-title">Cafe</h5>
-                <p className="card-text">10.0</p>
-              </div>
-            </article>
-            <article className="card mx-auto text-center align-self-start mt-2">
-              <img className="imgProductoMediano mx-auto mt-2" src={coffee} alt="" />
-              <div className="card-body">
-                <h5 className="card-title">Cafe</h5>
-                <p className="card-text">10.0</p>
-              </div>
-            </article>
-            <article className="card mx-auto text-center align-self-start mt-2 ">
-              <img className="imgProductoMediano mx-auto mt-2" src={coffee} alt="" />
-              <div className="card-body">
-                <h5 className="card-title">Cafe</h5>
-                <p className="card-text">10.0</p>
-              </div>
-            </article>
-            <article className="card mx-auto text-center align-self-start mt-2">
-              <img className="imgProductoMediano mx-auto mt-2" src={coffee} alt="" />
-              <div className="card-body">
-                <h5 className="card-title">Cafe</h5>
-                <p className="card-text">10.0</p>
-              </div>
-            </article>
+            {productos?.map((producto) => (
+              <article key={producto.id} className="card mx-auto text-center align-self-start mt-2 w-40">
+                <img className="imgProductoMediano mx-auto mt-2" src={producto.image} alt="" />
+                <div className="card-body">
+                  <h5 className="card-title">{producto.name}</h5>
+                  <p className="card-text">{producto.price}</p>
+                </div>
+              </article>
+
+
+            ))}
+
+
 
 
 
           </section>
-          <section className="col-6 mt-2" >
+          <section className="col-6 mt-2 ms-2" >
             <div className="row ">
               <div className="w-100 px-2">
                 <label htmlFor="cliente" className="fw-bold">Cliente</label>

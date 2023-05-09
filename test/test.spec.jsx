@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 describe('NavAdmin', () => {
   it('Deberia de renderizar el componente correctamente', () => {
+    // simulo el dibujo del componente
     const { getByText } = render(
       <BrowserRouter>
         <NavAdmin />
@@ -16,6 +17,7 @@ describe('NavAdmin', () => {
     const productosLink = getByText('Productos');
     const salirLink = getByText('Salir');
 
+    // si esta en el documento los 4 textos pasa el test
     expect(adminBrand).toBeInTheDocument();
     expect(empleadosLink).toBeInTheDocument();
     expect(productosLink).toBeInTheDocument();
@@ -28,7 +30,7 @@ describe('NavAdmin', () => {
         <NavAdmin />
       </BrowserRouter>
     );
-
+    //si la localización en el navegador luego de hacer clic es corrrecta pasa el test
     const empleadosLink = getByText('Empleados');
     fireEvent.click(empleadosLink);
     expect(location.pathname).toBe('/admin/empleados');
