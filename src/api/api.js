@@ -125,3 +125,17 @@ export async function httpActualizarProducto(token, producto,id) {
     console.log(error);
   }
 }
+
+export async function httpCrearPedido(token, pedido) {
+  try {
+    const response = await axios.post(`http://localhost:8080/orders`, pedido, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}

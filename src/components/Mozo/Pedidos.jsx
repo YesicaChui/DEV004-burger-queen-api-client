@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from "react";
 import { NavMozo } from './NavMozo'
 import coffee from '../../assets/coffee.png'
-import { httpObtenerProductos } from "../../api/api";
+import { httpObtenerProductos,httpCrearPedido } from "../../api/api";
 
 export const Pedidos = ({ token }) => {
   const [productos, setProductos] = useState([])
@@ -22,6 +22,12 @@ export const Pedidos = ({ token }) => {
 
   function agregarAPedido(producto){
     setProductosPedido([...productosPedido,{qty:1,product:producto}])
+  }
+
+  async function crearPedido(){
+    const pedido={client:nombre,products:productosPedido,status:"pending"}
+    await httpCrearPedido(token,pedido)
+    alert("Se Envio a cocina el Pedido")
   }
   return (
     <>
@@ -85,7 +91,7 @@ export const Pedidos = ({ token }) => {
                 <p className="text-end fw-bold">
                   Total: S/.<span>{productosPedido.reduce((acumulador,elemento)=>acumulador+elemento.qty*elemento.product.price,0)}</span>
                 </p>
-                <button className="btn btn-primary btn-lg me-2">Enviar a Cocina</button>
+                <button className="btn btn-primary btn-lg me-2" onClick={()=>crearPedido()}>Enviar a Cocina</button>
 
               </div>
             </div>
