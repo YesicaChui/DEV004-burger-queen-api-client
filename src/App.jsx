@@ -31,15 +31,15 @@ function App() {
     },
     {
       path: "/mozo/lista_pedidos",
-      element:<ListaPedidos/>
+      element:<ListaPedidos token={token}/>
     },
     {
       path: "/cocina/pendientes",
-      element:<Pendientes/>
+      element:<Pendientes token={token}/>
     },
     {
       path: "/cocina/completadas",
-      element:<Completadas/>
+      element:<Completadas token={token}/>
     },
     {
       //ruta de navegación

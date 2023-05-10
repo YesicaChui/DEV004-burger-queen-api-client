@@ -25,7 +25,11 @@ export const Pedidos = ({ token }) => {
   }
 
   async function crearPedido(){
-    const pedido={client:nombre,products:productosPedido,status:"pending"}
+    if(nombre==="") {
+      alert("Debe poner un nombre al pedido")
+      return
+    }
+    const pedido={client:nombre,products:productosPedido,status:"pending",dataEntry:"2023-05-01 12:09:48"}
     await httpCrearPedido(token,pedido)
     alert("Se Envio a cocina el Pedido")
   }
