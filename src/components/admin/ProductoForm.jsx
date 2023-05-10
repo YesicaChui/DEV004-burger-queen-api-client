@@ -1,8 +1,10 @@
 import React from 'react'
 import {   httpCrearProducto, httpActualizarProducto } from "../../api/api";
 
-export const ProductoForm = ({producto,onSave,cancelarEdicion,setProducto,isEdit,token}) => {
+export const ProductoForm = ({producto,formFunciones,isEdit}) => {
+  // si producto es null le damos un objeto con valores por defecto
   const {nombre,precio,imagen,tipo,idEdit}=producto||{nombre:"",precio:"",imagen:"",idEdit:"",tipo:""}
+  const { leerProductos, cancelarEdicion, setProducto, token } = formFunciones;
   async function guardarProducto(e) {
     e.preventDefault();
     if (!nombre) return alert("Debe ingresar un nombre")
@@ -22,7 +24,8 @@ export const ProductoForm = ({producto,onSave,cancelarEdicion,setProducto,isEdit
       await httpActualizarProducto(token, newProducto,idEdit)
       alert("Se actualizo los datos del producto con exito")
     }
-    onSave()
+    
+    leerProductos()
     cancelarEdicion()
 
   }

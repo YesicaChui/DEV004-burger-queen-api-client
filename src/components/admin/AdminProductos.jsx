@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { NavAdmin } from "./NavAdmin"
-import {  httpObtenerProductos, httpEliminarProducto } from "../../api/api";
+import { httpObtenerProductos, httpEliminarProducto } from "../../api/api";
 import { ProductoForm } from "./ProductoForm";
 
 export const AdminProductos = ({ token }) => {
- 
+
   const [productos, setProductos] = useState([])
-  const [producto,setProducto]=useState(null)
-  const [isEdit, setIsEdit] = useState(false)
+  const [producto, setProducto] = useState(null)
+ const [isEdit, setIsEdit] = useState(false)
+  const formFunciones = { leerProductos, cancelarEdicion, setProducto, token };
+
   async function leerProductos() {
     setProductos(await httpObtenerProductos(token))
   }
@@ -20,10 +22,10 @@ export const AdminProductos = ({ token }) => {
     await leerProductos()
   }
 
-  async function activarEdicionProducto(idEdit,nombre,precio,imagen,tipo) {
+  async function activarEdicionProducto(idEdit, nombre, precio, imagen, tipo) {
     scrollTo(0, 0);
-    setProducto({idEdit,nombre,precio,imagen,tipo})
-     setIsEdit(true)
+    setProducto({ idEdit, nombre, precio, imagen, tipo })
+    setIsEdit(true)
   }
 
   function cancelarEdicion() {
@@ -34,15 +36,23 @@ export const AdminProductos = ({ token }) => {
   console.log(producto)
   console.log("valor de producto")
   //la primera vez que se llame al componente cargo los datos de los empleados
-  useEffect(() => leerProductos() , [])
+  // How to use async function in useEffect?
+  // https://dev.to/jasmin/how-to-use-async-function-in-useeffect-5efc
+   // useEffect(() => leerProductos() , [])
+  useEffect(() => {
+    const leer = async () => {
+      await leerProductos();
+    };
+    leer();
+  }, [])
 
-  const onSave=()=> leerProductos()
+  // const onSave = () => leerProductos()
 
   return (
     <>
       <NavAdmin />
       <section className="container p-3">
-      <ProductoForm producto={producto} onSave={onSave} cancelarEdicion={cancelarEdicion} setProducto={setProducto} isEdit={isEdit} token={token}/>
+        <ProductoForm producto={producto} formFunciones={formFunciones} isEdit={isEdit} />
         <h2 className="text-center my-4">Administrar Productos</h2>
         <div className="row">
           <div className="col-lg-8 mx-auto">
@@ -60,10 +70,10 @@ export const AdminProductos = ({ token }) => {
                   <tr key={producto.id}>
                     <td>{producto.name}</td>
                     <td>{producto.price}</td>
-                    <td><img src={producto.image} alt="Imagen del producto" className="imgProducto"/></td>
+                    <td><img src={producto.image} alt="Imagen del producto" className="imgProducto" /></td>
                     <td>{producto.type}</td>
                     <td>
-                      <button className="btn btn-warning btn-sm me-2" onClick={() => activarEdicionProducto(producto.id,producto.name,producto.price, producto.image, producto.type)}>Editar</button>
+                      <button className="btn btn-warning btn-sm me-2" onClick={() => activarEdicionProducto(producto.id, producto.name, producto.price, producto.image, producto.type)}>Editar</button>
                       <button className="btn btn-danger btn-sm" onClick={() => eliminarProducto(producto.id)}>Eliminar</button>
                     </td>
                   </tr>
