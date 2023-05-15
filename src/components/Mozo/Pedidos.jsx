@@ -61,6 +61,8 @@ export const Pedidos = ({ token }) => {
         dataEntry: fechaHoraActual
       }
       await httpCrearPedido(token, pedido)
+      setProductosPedido([])
+      setNombre("")
       alert("Se Envio a cocina el Pedido")
     }
   return (
