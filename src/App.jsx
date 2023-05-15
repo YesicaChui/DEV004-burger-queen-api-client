@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { /* createBrowserRouter, RouterProvider */BrowserRouter,Routes,Route } from 'react-router-dom'
 import { Login } from './components/Login.jsx'
 import { AdminEmpleados } from './components/admin/AdminEmpleados.jsx'
 import { AdminProductos } from './components/admin/AdminProductos.jsx'
@@ -16,7 +16,7 @@ function App() {
 
   // variable que guarda todas las rutas del front para la navegación
   // createBrowserRouter necesita un arreglo de objetos con las rutas de navegación
-  const router = createBrowserRouter([
+/*   const router = createBrowserRouter([
     {
       //ruta de navegacion raiz
       path: "/",
@@ -51,11 +51,22 @@ function App() {
       path: "/admin/productos",
       element:<AdminProductos token={token}/>
     },
-  ])
+  ]) */
   return (
     //entregamos las rutas de navegación a RouterProvider
     <>
-        <RouterProvider router={router}/>     
+        {/* <RouterProvider router={router}/>     */} 
+        <BrowserRouter>
+          <Routes>
+            <Route  path= "/"  element={<Login actualizarToken={actualizarToken}/>}/>
+            <Route  path= "/mozo/pedidos"  element={<Pedidos token={token}/>}/>
+            <Route  path= "/mozo/lista_pedidos"  element={<ListaPedidos token={token}/>}/>
+            <Route  path= "/cocina/pendientes"  element={<Pendientes token={token}/>}/>
+            <Route  path= "/cocina/completadas"  element={<Completadas token={token}/>}/>
+            <Route  path= "/admin/empleados"  element={<AdminEmpleados token={token}/>}/>
+            <Route  path= "/admin/productos"  element={<AdminProductos token={token}/>}/>
+          </Routes>
+        </BrowserRouter>
     </>
   )
 }
