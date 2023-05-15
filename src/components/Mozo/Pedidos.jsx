@@ -1,8 +1,8 @@
 import React from 'react'
 import { useEffect, useState } from "react";
 import { NavMozo } from './NavMozo'
-import coffee from '../../assets/coffee.png'
 import { httpObtenerProductos,httpCrearPedido } from "../../api/api";
+import moment from 'moment/moment';
 
 export const Pedidos = ({ token }) => {
   const [productos, setProductos] = useState([])
@@ -29,11 +29,12 @@ export const Pedidos = ({ token }) => {
       alert("Debe poner un nombre al pedido")
       return
     }
+    const fechaHoraActual=moment().format('YYYY-MM-DD HH:mm:ss')
     const pedido={
       client:nombre,
       products:productosPedido,
       status:"pending",
-      dataEntry:"2023-05-01 12:09:48"
+      dataEntry:fechaHoraActual
     }
     await httpCrearPedido(token,pedido)
     alert("Se Envio a cocina el Pedido")
