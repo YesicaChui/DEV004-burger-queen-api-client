@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { httpLogin } from '../api/api';
 // https://ultimatecourses.com/blog/programmatically-navigate-react-router
@@ -18,6 +18,9 @@ export const Login = ({ actualizarToken }) => {
       alert("Email o contraseña incorrectos Verifique porfavor")
     }
   }
+  
+  // añadido para que cuando se llame a salir de cualquier nav limpie el token y no pueda usar las rutas nuevamente
+  useEffect(() => actualizarToken(""), [])
 
   return (
     <>

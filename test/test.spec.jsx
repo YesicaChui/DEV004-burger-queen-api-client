@@ -4,6 +4,7 @@ import { NavAdmin } from '../src/components/admin/NavAdmin';
 import { BrowserRouter } from 'react-router-dom';
 // testing de componentes
 // https://www.youtube.com/watch?v=FjJu3hcPSCY&ab_channel=Garajedeideas
+
 describe('NavAdmin', () => {
   it('Deberia de renderizar el componente correctamente', () => {
     // simulo el dibujo del componente
