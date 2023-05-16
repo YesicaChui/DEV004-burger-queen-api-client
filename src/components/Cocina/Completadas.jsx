@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavGestionCocina } from './NavGestionPedidos'
 
-export const Completadas = () => {
+export const Completadas = ({token}) => {
   return (
     <>
       <NavGestionCocina/>

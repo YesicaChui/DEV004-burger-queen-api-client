@@ -58,7 +58,7 @@ export const Pedidos = ({ token }) => {
         client: nombre,
         products: productosPedido,
         status: "pending",
-        dataEntry: fechaHoraActual
+        dateEntry: fechaHoraActual
       }
       await httpCrearPedido(token, pedido)
       setProductosPedido([])

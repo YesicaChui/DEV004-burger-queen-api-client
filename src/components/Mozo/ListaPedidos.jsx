@@ -26,7 +26,7 @@ export const ListaPedidos = ({ token }) => {
                 <h2 className="card-header bg-success text-white">{pedido.status === "pending" ? "Pendiente" : "Listo"}</h2>
                 <div className="card-body">
                   <h5 className="card-title">{pedido.client}</h5>
-                  <p className="card-text">{pedido.dataEntry}</p>
+                  <p className="card-text">{pedido.dateEntry}</p>
                   <p className="card-text fw-bold">Pedido</p>
                   <ul className="product-pedidos list-group ">
                     {pedido.products?.map((producto, indice) => (
