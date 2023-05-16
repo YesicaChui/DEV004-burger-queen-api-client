@@ -23,7 +23,9 @@ export const ListaPedidos = ({ token }) => {
 
             pedido.status == "pending" || pedido.status == "delivering" ?
               <article key={pedido.id} className="card mx-auto align-self-start mt-2">
-                <h2 className="card-header bg-success text-white">{pedido.status === "pending" ? "Pendiente" : "Listo"}</h2>
+                {pedido.status === "pending" ? <h2 className="card-header bg-warning text-white">Pendiente</h2> : ""}
+                {pedido.status === "delivering" ? <h2 className="card-header bg-success text-white">Listo</h2> : ""}
+                
                 <div className="card-body">
                   <h5 className="card-title">{pedido.client}</h5>
                   <p className="card-text">{pedido.dateEntry}</p>
@@ -34,7 +36,8 @@ export const ListaPedidos = ({ token }) => {
                     ))}
                   </ul>
                 </div>
-                <button className="btn btn-danger">{pedido.status === "pending" ? "Cancelar" : "Entregar"}</button>
+                {pedido.status === "pending" ?  <button className="btn btn-danger">Cancelar</button> : ""}
+                {pedido.status === "delivering" ?  <button className="btn btn-primary">Entregar</button> : ""}
               </article> :
               ""
           ))}
