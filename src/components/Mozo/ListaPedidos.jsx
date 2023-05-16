@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { NavMozo } from './NavMozo'
-import { httpObtenerPedidos } from '../../api/api'
+import { httpObtenerPedidos, httpActualizarPedido } from '../../api/api'
 export const ListaPedidos = ({ token }) => {
 
   const [pedidos, setPedidos] = useState([])
@@ -14,6 +14,15 @@ export const ListaPedidos = ({ token }) => {
     };
     leer();
   }, [])
+
+  async function actualizarPedido(id,estado){
+    const status={
+      "status": estado
+    }
+    await httpActualizarPedido(token,status,id)
+    await leerPedidos()
+  }
+
   return (
     <>
       <NavMozo />
@@ -36,8 +45,8 @@ export const ListaPedidos = ({ token }) => {
                     ))}
                   </ul>
                 </div>
-                {pedido.status === "pending" ?  <button className="btn btn-danger">Cancelar</button> : ""}
-                {pedido.status === "delivering" ?  <button className="btn btn-primary">Entregar</button> : ""}
+                {pedido.status === "pending" ?  <button className="btn btn-danger" onClick={()=>actualizarPedido(pedido.id,"canceled")}>Cancelar</button> : ""}
+                {pedido.status === "delivering" ?  <button className="btn btn-primary" onClick={()=>actualizarPedido(pedido.id,"delivered")}>Entregar</button> : ""}
               </article> :
               ""
           ))}
