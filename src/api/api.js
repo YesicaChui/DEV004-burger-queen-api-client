@@ -152,3 +152,17 @@ export async function httpObtenerPedidos(token) {
     console.log(error);
   }
 }
+
+export async function httpActualizarPedido(token, status,id) {
+  try {
+    const response = await axios.patch(`http://localhost:8080/orders/${id}`, status, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { NavGestionCocina } from './NavGestionPedidos'
-import { httpObtenerPedidos } from '../../api/api'
+import { httpObtenerPedidos,httpActualizarPedido } from '../../api/api'
+import moment from 'moment/moment';
 export const Pendientes = ({token}) => {
 
   const [pedidos, setPedidos] = useState([])
@@ -14,6 +15,17 @@ export const Pendientes = ({token}) => {
     };
     leer();
   }, [])
+
+  async function actualizarPedido(id){
+    const fechaHoraActual = moment().format('YYYY-MM-DD HH:mm:ss')
+    const status={
+      "status": "delivered",
+      "dateProcessed": fechaHoraActual
+    }
+    await httpActualizarPedido(token,status,id)
+    await leerPedidos()
+  }
+
   return (
     <>
       <NavGestionCocina/>
@@ -33,7 +45,7 @@ export const Pendientes = ({token}) => {
                     ))}
                   </ul>
             </div>
-            <button className="btn  btn-success">Listo</button>
+            <button className="btn  btn-success" onClick={()=>actualizarPedido(pedido.id)}>Listo</button>
           </article>:
           ""
         ))}
