@@ -28,7 +28,7 @@ export const Completadas = ({token}) => {
         <h1  className="text-center">Completadas</h1>
         <section className="productos-orden d-flex justify-content-between flex-wrap">
         {pedidos?.map((pedido) => (
-          pedido.status == "delivered"?
+          pedido.status == "delivered"|| pedido.status == "delivering"?
          
           <article key={pedido.id} className="card mx-auto align-self-start mt-2">           
             <h2 className="card-header bg-warning text-white">{diferenciaFechasMinutos(pedido.dateEntry,pedido.dateProcessed)} min</h2>

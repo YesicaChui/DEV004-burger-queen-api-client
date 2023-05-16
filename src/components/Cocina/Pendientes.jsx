@@ -19,7 +19,7 @@ export const Pendientes = ({token}) => {
   async function actualizarPedido(id){
     const fechaHoraActual = moment().format('YYYY-MM-DD HH:mm:ss')
     const status={
-      "status": "delivered",
+      "status": "delivering",
       "dateProcessed": fechaHoraActual
     }
     await httpActualizarPedido(token,status,id)
