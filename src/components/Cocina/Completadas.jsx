@@ -23,16 +23,16 @@ export const Completadas = ({token}) => {
         {pedidos?.map((pedido) => (
           pedido.status == "delivered"?
          
-          <article className="card mx-auto align-self-start mt-2">
+          <article key={pedido.id} className="card mx-auto align-self-start mt-2">
             <h2 className="card-header bg-warning text-white">12 min</h2>
             <div className="card-body">
-              <h5 className="card-title">Willy</h5>
-              <p className="card-text">2023-05-01 12:09:48</p>
+              <h5 className="card-title">{pedido.client}</h5>
+              <p className="card-text">{pedido.dateEntry}</p>
               <p className="card-text fw-bold">Pedido</p>
               <ul className="product-pedidos list-group ">              
-                <li className="list-group-item">Hamburguesa 1</li>
-                <li className="list-group-item">Coca Cola 2</li>
-                <li className="list-group-item">Cafe</li>
+              {pedido.products?.map((producto, indice) => (
+                      <li key={indice} className="list-group-item">{producto.product.name} {producto.qty}</li>
+                    ))}
               </ul>
             </div>
           
