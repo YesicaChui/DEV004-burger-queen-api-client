@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect, useState } from "react";
 import { NavMozo } from './NavMozo'
 import { httpObtenerProductos, httpCrearPedido } from "../../api/api";

@@ -1,4 +1,3 @@
-import React from 'react'
 import {   httpCrearProducto, httpActualizarProducto } from "../../api/api";
 
 export const ProductoForm = ({producto,formFunciones,isEdit}) => {
@@ -18,7 +17,7 @@ export const ProductoForm = ({producto,formFunciones,isEdit}) => {
       "type": tipo
     }
     if (!isEdit) {
-      const data = await httpCrearProducto(token, newProducto)
+      await httpCrearProducto(token, newProducto)
       alert("Se inserto el producto con exito")
     } else {
       await httpActualizarProducto(token, newProducto,idEdit)

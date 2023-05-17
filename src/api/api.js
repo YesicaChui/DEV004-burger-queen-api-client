@@ -1,5 +1,5 @@
 import axios from "axios";
-const dominiolocal = 'http://localhost:8080'
+// const dominiolocal = 'http://localhost:8080'
 const dominio = 'https://burger-queen-api-mock-production-7906.up.railway.app'
 
 export async function httpLogin(usuario, contrasena) {

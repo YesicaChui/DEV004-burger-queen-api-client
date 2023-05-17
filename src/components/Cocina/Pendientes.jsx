@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import  { useState, useEffect } from 'react'
 import { NavGestionCocina } from './NavGestionPedidos'
 import { httpObtenerPedidos,httpActualizarPedido } from '../../api/api'
 import moment from 'moment/moment';

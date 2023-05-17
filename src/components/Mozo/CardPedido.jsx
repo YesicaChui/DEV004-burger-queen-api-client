@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const CardPedido = ({ pedido }) => {
   return (
     <div className="card-body">

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { NavGestionCocina } from './NavGestionPedidos'
 import { httpObtenerPedidos } from '../../api/api'
 import moment from 'moment/moment';
 export const Completadas = ({token}) => {
   const [pedidos, setPedidos] = useState([])
-
   async function leerPedidos() {
     setPedidos(await httpObtenerPedidos(token))
   }
@@ -52,3 +51,4 @@ export const Completadas = ({token}) => {
     </>
   )
 }
+

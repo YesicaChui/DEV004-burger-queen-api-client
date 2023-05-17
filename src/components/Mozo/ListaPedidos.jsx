@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { NavMozo } from './NavMozo'
 import { httpObtenerPedidos, httpActualizarPedido } from '../../api/api'
 import { CardPedido } from './CardPedido'

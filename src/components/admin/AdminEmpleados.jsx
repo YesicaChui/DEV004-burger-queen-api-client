@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavAdmin } from "./NavAdmin"
-import { httpObtenerEmpleados, httpCrearEmpleado, httpEliminarEmpleado,httpActualizarEmpleado } from "../../api/api";
+import { httpObtenerEmpleados, httpCrearEmpleado, httpEliminarEmpleado, httpActualizarEmpleado } from "../../api/api";
 export const AdminEmpleados = ({ token }) => {
 
   const [empleados, setEmpleados] = useState([])
@@ -8,7 +8,7 @@ export const AdminEmpleados = ({ token }) => {
   const [idEdit, setIdEdit] = useState("")
   const [correo, setCorreo] = useState("")
   const [rol, setRol] = useState("")
-  const [contrasena, setContrasena]=useState("")
+  const [contrasena, setContrasena] = useState("")
   async function guardarEmpleado(e) {
     e.preventDefault();
     if (!correo) return alert("Debe ingresar su correo")
@@ -21,11 +21,11 @@ export const AdminEmpleados = ({ token }) => {
     }
     // si no estoy editando creo el empleado
     if (!isEdit) {
-      const data = await httpCrearEmpleado(token, usuario)
+      await httpCrearEmpleado(token, usuario)
       alert("Se inserto al empleado con exito")
       //caso contrario actualizo el empleado
     } else {
-      await httpActualizarEmpleado(token, usuario,idEdit)
+      await httpActualizarEmpleado(token, usuario, idEdit)
       alert("Se actualizo los datos del empleado con exito")
     }
     cancelarEdicion()
@@ -44,7 +44,7 @@ export const AdminEmpleados = ({ token }) => {
     await leerEmpleados()
   }
 
-  async function activarEdicionEmpleado(id,correo,rol) {
+  async function activarEdicionEmpleado(id, correo, rol) {
     scrollTo(0, 0);
     setIsEdit(true)
     setIdEdit(id)
@@ -89,11 +89,11 @@ export const AdminEmpleados = ({ token }) => {
               </div>
               <div className="mb-3">
                 <label htmlFor="contrasena" className="form-label text-white">Contraseña</label>
-                <input type="password" id="contrasena" className="form-control" name="Contrasena" value={contrasena} onChange={(e)=>setContrasena(e.target.value)}/>
+                <input type="password" id="contrasena" className="form-control" name="Contrasena" value={contrasena} onChange={(e) => setContrasena(e.target.value)} />
               </div>
               <div className="mb-3">
                 <label htmlFor="rol" className="form-label text-white">Rol</label>
-                <select id="rol" className="form-select" name="Rol" value={rol} onChange={(e)=>setRol(e.target.value)}>
+                <select id="rol" className="form-select" name="Rol" value={rol} onChange={(e) => setRol(e.target.value)}>
                   <option value="" disabled>Selecciona un rol</option>
                   <option value="chef">Chef</option>
                   <option value="waiter">Waiter</option>
@@ -125,7 +125,7 @@ export const AdminEmpleados = ({ token }) => {
                     <td>{empleado.email}</td>
                     <td>{empleado.role}</td>
                     <td>
-                      <button className="btn btn-warning btn-sm me-2" onClick={() => activarEdicionEmpleado(empleado.id,empleado.email,empleado.role)}>Editar</button>
+                      <button className="btn btn-warning btn-sm me-2" onClick={() => activarEdicionEmpleado(empleado.id, empleado.email, empleado.role)}>Editar</button>
                       <button className="btn btn-danger btn-sm" onClick={() => eliminarEmpleado(empleado.id)}>Eliminar</button>
                     </td>
                   </tr>
