@@ -34,7 +34,8 @@ export const Completadas = ({token}) => {
             <h2 className="card-header bg-warning text-white">{diferenciaFechasMinutos(pedido.dateEntry,pedido.dateProcessed)} min</h2>
             <div className="card-body">
               <h5 className="card-title">{pedido.client}</h5>
-              <p className="card-text">{pedido.dateEntry}</p>
+              <p className="card-text"><b>Ingreso:</b> {pedido.dateEntry}</p>
+              <p className="card-text"><b>Finalizado:</b> {pedido.dateProcessed}</p>
               <p className="card-text fw-bold">Pedido</p>
               <ul className="product-pedidos list-group ">              
               {pedido.products?.map((producto, indice) => (
