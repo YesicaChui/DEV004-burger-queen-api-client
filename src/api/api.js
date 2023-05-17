@@ -1,8 +1,9 @@
 import axios from "axios";
+const dominio = 'http://localhost:8080'
 
 export async function httpLogin(usuario, contrasena) {
   try {
-    const response = await axios.post(`http://localhost:8080/login`, {
+    const response = await axios.post(`${dominio}/login`, {
       "email": usuario,
       "password": contrasena
     }, {
@@ -19,7 +20,7 @@ export async function httpLogin(usuario, contrasena) {
 
 export async function httpObtenerEmpleados(token) {
   try {
-    const response = await axios.get("http://localhost:8080/users", {
+    const response = await axios.get(`${dominio}/users`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -33,7 +34,7 @@ export async function httpObtenerEmpleados(token) {
 
 export async function httpEliminarEmpleado(token, id) {
   try {
-    const response = await axios.delete(`http://localhost:8080/users/${id}`, {
+    const response = await axios.delete(`${dominio}/users/${id}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -46,7 +47,7 @@ export async function httpEliminarEmpleado(token, id) {
 
 export async function httpCrearEmpleado(token, user) {
   try {
-    const response = await axios.post(`http://localhost:8080/users`, user, {
+    const response = await axios.post(`${dominio}/users`, user, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -60,7 +61,7 @@ export async function httpCrearEmpleado(token, user) {
 
 export async function httpActualizarEmpleado(token, user,id) {
   try {
-    const response = await axios.patch(`http://localhost:8080/users/${id}`, user, {
+    const response = await axios.patch(`${dominio}/users/${id}`, user, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -74,7 +75,7 @@ export async function httpActualizarEmpleado(token, user,id) {
 
 export async function httpObtenerProductos(token) {
   try {
-    const response = await axios.get("http://localhost:8080/products", {
+    const response = await axios.get(`${dominio}/products`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -87,7 +88,7 @@ export async function httpObtenerProductos(token) {
 
 export async function httpCrearProducto(token, producto) {
   try {
-    const response = await axios.post(`http://localhost:8080/products`, producto, {
+    const response = await axios.post(`${dominio}/products`, producto, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -101,7 +102,7 @@ export async function httpCrearProducto(token, producto) {
 
 export async function httpEliminarProducto(token, id) {
   try {
-    const response = await axios.delete(`http://localhost:8080/products/${id}`, {
+    const response = await axios.delete(`${dominio}/products/${id}`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -114,7 +115,7 @@ export async function httpEliminarProducto(token, id) {
 
 export async function httpActualizarProducto(token, producto,id) {
   try {
-    const response = await axios.patch(`http://localhost:8080/products/${id}`, producto, {
+    const response = await axios.patch(`${dominio}/products/${id}`, producto, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -128,7 +129,7 @@ export async function httpActualizarProducto(token, producto,id) {
 
 export async function httpCrearPedido(token, pedido) {
   try {
-    const response = await axios.post(`http://localhost:8080/orders`, pedido, {
+    const response = await axios.post(`${dominio}/orders`, pedido, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
@@ -142,7 +143,7 @@ export async function httpCrearPedido(token, pedido) {
 
 export async function httpObtenerPedidos(token) {
   try {
-    const response = await axios.get("http://localhost:8080/orders", {
+    const response = await axios.get(`${dominio}/orders`, {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -155,7 +156,7 @@ export async function httpObtenerPedidos(token) {
 
 export async function httpActualizarPedido(token, status,id) {
   try {
-    const response = await axios.patch(`http://localhost:8080/orders/${id}`, status, {
+    const response = await axios.patch(`${dominio}/orders/${id}`, status, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
