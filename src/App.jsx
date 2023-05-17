@@ -8,6 +8,7 @@ import { ListaPedidos } from './components/Mozo/ListaPedidos.jsx'
 import { Pendientes } from './components/Cocina/Pendientes.jsx'
 import { Completadas } from './components/Cocina/Completadas.jsx'
 import { RutaProtegida } from './components/RutaProtegida.jsx'
+import { MozoCanceladasEntregadas } from './components/Mozo/MozoCanceladasEntregadas.jsx'
 function App() {
 
   // variable de estado donde guardare el token para usar las rutas del backend
@@ -62,6 +63,8 @@ function App() {
           <Route element={<RutaProtegida isLogin={!!token}/>}>
             <Route path="/mozo/pedidos" element={<Pedidos token={token} />} />
             <Route path="/mozo/lista_pedidos" element={<ListaPedidos token={token} />} />
+            <Route path="/mozo/reporteCanceladas" element={<MozoCanceladasEntregadas token={token} tipoReporte={"canceled"}/>} />
+            <Route path="/mozo/reporteEntregadas" element={<MozoCanceladasEntregadas token={token} tipoReporte={"delivered "}/>} />
             <Route path="/cocina/pendientes" element={<Pendientes token={token} />} />
             <Route path="/cocina/completadas" element={<Completadas token={token} />} />
             <Route path="/admin/empleados" element={<AdminEmpleados token={token} />} />

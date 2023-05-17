@@ -17,7 +17,16 @@ export const NavMozo = () => {
               <li className="nav-item">
                 <Link className="nav-link" to={`/mozo/lista_pedidos`}>Lista Pedidos</Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item dropdown me-3">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Reportes
+                </a>
+                <ul className="dropdown-menu">
+                  <li> <Link className="dropdown-item" to={`/mozo/reporteCanceladas`}>Ver Canceladas</Link></li>
+                  <li> <Link className="dropdown-item" to={`/mozo/reporteEntregadas`}>Ver Entregadas</Link></li>
+                </ul>
+              </li>
+              <li className="nav-item me-3">
                 <Link className="nav-link" to={`/`}>Salir</Link>
               </li>
             </ul>
