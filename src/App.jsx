@@ -64,7 +64,7 @@ function App() {
             <Route path="/mozo/pedidos" element={<Pedidos token={token} />} />
             <Route path="/mozo/lista_pedidos" element={<ListaPedidos token={token} />} />
             <Route path="/mozo/reporteCanceladas" element={<MozoCanceladasEntregadas token={token} tipoReporte={"canceled"}/>} />
-            <Route path="/mozo/reporteEntregadas" element={<MozoCanceladasEntregadas token={token} tipoReporte={"delivered "}/>} />
+            <Route path="/mozo/reporteEntregadas" element={<MozoCanceladasEntregadas token={token} tipoReporte={"delivered"}/>} />
             <Route path="/cocina/pendientes" element={<Pendientes token={token} />} />
             <Route path="/cocina/completadas" element={<Completadas token={token} />} />
             <Route path="/admin/empleados" element={<AdminEmpleados token={token} />} />

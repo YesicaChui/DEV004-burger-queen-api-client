@@ -73,7 +73,7 @@ export const Pedidos = ({ token }) => {
           <section className="productos-orden d-flex justify-content-between flex-wrap col-6">
             {productos?.map((producto) => (
               <article key={producto.id} className="card mx-auto text-center align-self-start mt-2 w-40" onClick={() => agregarAPedido(producto)}>
-                <img className="imgProductoMediano mx-auto mt-2" src={producto.image} alt="" />
+                <img className="imgProductoMediano mx-auto mt-2" src={producto.image} alt={`Producto ${producto.name}`} />
                 <div className="card-body">
                   <h5 className="card-title">{producto.name}</h5>
                   <p className="card-text">{producto.price}</p>
@@ -81,11 +81,11 @@ export const Pedidos = ({ token }) => {
               </article>
             ))}
           </section>
-          <section className="col-6 mt-2 ms-2" >
+          <section className="col-6 mt-2 ms-2 pedido-orden" >
             <div className="row ">
               <div className="w-100 px-2">
                 <label htmlFor="cliente" className="fw-bold">Cliente</label>
-                <input id="cliente" type="text" className="form-control mb-2" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+                <input data-testid={`input-cliente`} id="cliente" type="text" className="form-control mb-2" value={nombre} onChange={(e) => setNombre(e.target.value)} />
                 <table className="table table-hover">
                   <thead>
                     <tr>
@@ -99,14 +99,14 @@ export const Pedidos = ({ token }) => {
                     {productosPedido?.map((pedido, indice) => (
                       <tr key={indice}>
                         <td>
-                          <img src={pedido.product.image} alt="Imagen del producto" className="imgProducto" />
+                          <img src={pedido.product.image} alt={`Orden ${pedido.product.name}`} className="imgProducto" />
                         </td>
                         <td className="align-middle">{pedido.product.price}</td>
-                        <td className="align-middle">{pedido.qty}</td>
+                        <td className="align-middle"  data-testid={`cantidad ${indice}`} >{pedido.qty}</td>
                         <td className="align-middle">
-                          <button className="btn btn-warning btn-sm ms-1" onClick={() => disminuirrUnProductoAPedido(indice)}><i className="bi bi-dash" /></button>
-                          <button className="btn btn-danger btn-sm ms-1" onClick={() => incrementarUnProductoAPedido(indice)}><i className="bi bi-plus" /></button>
-                          <button className="btn btn-danger btn-sm ms-1" onClick={() => eliminarProductoDePedido(indice)}><i className="bi bi-trash3" /></button>
+                          <button className="btn btn-warning btn-sm ms-1" onClick={() => disminuirrUnProductoAPedido(indice)} data-testid={`disminuir ${indice}`}><i className="bi bi-dash" /></button>
+                          <button className="btn btn-danger btn-sm ms-1" onClick={() => incrementarUnProductoAPedido(indice)} data-testid={`aumentar ${indice}`}><i className="bi bi-plus" /></button>
+                          <button className="btn btn-danger btn-sm ms-1" onClick={() => eliminarProductoDePedido(indice)} data-testid={`borrar ${indice}`}><i className="bi bi-trash3" /></button>
                         </td>
                       </tr>
                     ))}
@@ -116,7 +116,7 @@ export const Pedidos = ({ token }) => {
                 <p className="text-end fw-bold">
                   Total: S/.<span>{productosPedido.reduce((acumulador, elemento) => acumulador + elemento.qty * elemento.product.price, 0)}</span>
                 </p>
-                <button className="btn btn-primary btn-lg me-2" onClick={() => crearPedido()}>Enviar a Cocina</button>
+                <button className="btn btn-primary btn-lg me-2" onClick={() => crearPedido()} data-testid={`boton-pedido`} >Enviar a Cocina</button>
 
               </div>
             </div>

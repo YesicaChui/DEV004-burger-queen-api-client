@@ -29,7 +29,7 @@ export const ListaPedidos = ({ token }) => {
       <NavMozo />
       <main>
         <section className="productos-orden d-flex justify-content-between flex-wrap">
-          {pedidos?.map((pedido) => (
+          {pedidos?.sort((a, b) => a.status.localeCompare(b.status)).map((pedido) => (
 
             pedido.status == "pending" || pedido.status == "delivering" ?
               <article key={pedido.id} className="card mx-auto align-self-start mt-2">

@@ -1,4 +1,8 @@
 export default {
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/src/api/api.js',
+  ],
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
