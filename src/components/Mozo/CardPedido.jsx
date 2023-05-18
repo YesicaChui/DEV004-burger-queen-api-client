@@ -1,4 +1,5 @@
 export const CardPedido = ({ pedido }) => {
+  // body utilizado en las pantallas ListaPedidos y cancelarEntregar
   return (
     <div className="card-body">
       <h5 className="card-title">{pedido.client}</h5>

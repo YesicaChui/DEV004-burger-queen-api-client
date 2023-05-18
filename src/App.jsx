@@ -16,16 +16,18 @@ function App() {
   // funcion de callback que actualizara el token cuando alguien ingresa al sistema
   const actualizarToken = (miToken) => setToken(miToken)
 
-  // Retornamos 
-    return (
+  // Retornamos las rutas del preoyecto
+  return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<RutaProtegida isLogin={!!token}/>}>
+          {/* se protegen las rutas con el componente RutaProtegida el cual enviamos en su prop si estamos logeados con un booleano */}
+          <Route element={<RutaProtegida isLogin={!!token} />}>
+            {/* el outlet representa a las rutas que son protegidas*/}
             <Route path="/mozo/pedidos" element={<Pedidos token={token} />} />
             <Route path="/mozo/lista_pedidos" element={<ListaPedidos token={token} />} />
-            <Route path="/mozo/reporteCanceladas" element={<MozoCanceladasEntregadas token={token} tipoReporte={"canceled"}/>} />
-            <Route path="/mozo/reporteEntregadas" element={<MozoCanceladasEntregadas token={token} tipoReporte={"delivered"}/>} />
+            <Route path="/mozo/reporteCanceladas" element={<MozoCanceladasEntregadas token={token} tipoReporte={"canceled"} />} />
+            <Route path="/mozo/reporteEntregadas" element={<MozoCanceladasEntregadas token={token} tipoReporte={"delivered"} />} />
             <Route path="/cocina/pendientes" element={<Pendientes token={token} />} />
             <Route path="/cocina/completadas" element={<Completadas token={token} />} />
             <Route path="/admin/empleados" element={<AdminEmpleados token={token} />} />

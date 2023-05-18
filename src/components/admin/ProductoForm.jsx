@@ -3,6 +3,7 @@ import {   httpCrearProducto, httpActualizarProducto } from "../../api/api";
 export const ProductoForm = ({producto,formFunciones,isEdit}) => {
   // si producto es null le damos un objeto con valores por defecto
   const {nombre,precio,imagen,tipo,idEdit}=producto||{nombre:"",precio:"",imagen:"",idEdit:"",tipo:""}
+  // son un objeto de funciones
   const { leerProductos, cancelarEdicion, setProducto, token } = formFunciones;
   async function guardarProducto(e) {
     e.preventDefault();

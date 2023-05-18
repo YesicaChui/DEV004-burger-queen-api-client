@@ -4,12 +4,17 @@ import { httpLogin } from '../api/api';
 // https://ultimatecourses.com/blog/programmatically-navigate-react-router
 // Componente login
 export const Login = ({ actualizarToken }) => {
+  // me permite navegar a rutas
   const navigate = useNavigate();
+  // variables de estado de los inputs de usuario y contraseña
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
+  // funcion asincrona que permite ingresar y navegar al usuario segun su rol
   const logearse = async (usuario, contrasena) => {
     try {
+      // llamo a la funcion httpLogin para validar el usuario y contraseña
       const data = await httpLogin(usuario, contrasena)
+      // si estoy logeado actualizo el token
       actualizarToken(data.accessToken)
       if (data.user.role === 'admin') return navigate('/admin/empleados');
       if (data.user.role === 'chef') return navigate('/cocina/pendientes');
