@@ -1,37 +1,45 @@
-import {   httpCrearProducto, httpActualizarProducto } from "../../api/api";
+import { httpCrearProducto, httpActualizarProducto } from "../../api/api";
 
 export const ProductoForm = ({producto,formFunciones,isEdit}) => {
   // si producto es null le damos un objeto con valores por defecto
   const {nombre,precio,imagen,tipo,idEdit}=producto||{nombre:"",precio:"",imagen:"",idEdit:"",tipo:""}
-  // son un objeto de funciones
-  const { leerProductos, cancelarEdicion, setProducto, token } = formFunciones;
+  // son un objeto de funciones entregadas por el padre
+  const { leerProductos:guardar, cancelarEdicion, setProducto, token } = formFunciones;
+
   async function guardarProducto(e) {
+    // evita que se actualice la pagina
     e.preventDefault();
+    // Verifico si los campos nombre, precio, imagen tipo no esten vacios para continuar sino le envio un alerta
     if (!nombre) return alert("Debe ingresar un nombre")
     if (!precio) return alert("Debe ingresar un precio")
     if (!imagen) return alert("Debe seleccionar una url de imagen")
     if (!tipo) return alert("Debe seleccionar un tipo")
+    // genero un objeto de producto en el formato requerido según el api
     const newProducto = {
       "name": nombre,
       "price": precio,
       "image": imagen,
       "type": tipo
     }
+    
     if (!isEdit) {
+      // si no estoy editando creo el producto
       await httpCrearProducto(token, newProducto)
       alert("Se inserto el producto con exito")
     } else {
+      // si estoy editando actualizo el producto
       await httpActualizarProducto(token, newProducto,idEdit)
       alert("Se actualizo los datos del producto con exito")
     }
-    
-    leerProductos()
+    // le avisamos que terminamos de guardar al padre para que lea los productos nuevamente
+    guardar()
+    // limpio los input al llamar a cancelar y restauro los botones
     cancelarEdicion()
-
   }
 
   return (
     <>
+      {/* si estamos editando mostrar texto Guardar Producto sino mostrar el texto Agregar Producto */}
        <h2 className="text-center mb-4">{isEdit ? "Guardar Producto" : "Agregar Productos"} </h2>
         <div className="row">
           <div className="col-lg-6 mx-auto">
@@ -44,6 +52,7 @@ export const ProductoForm = ({producto,formFunciones,isEdit}) => {
                   className="form-control"
                   name="nombre"
                   value={nombre}
+                  // Actualizo el objeto producto y cambio solo el nombre
                   onChange={(e) => setProducto({...producto,nombre:e.target.value})}
                 />
               </div>
@@ -66,6 +75,7 @@ export const ProductoForm = ({producto,formFunciones,isEdit}) => {
               </div>
               <div className="d-grid">
                 <button type="submit" className="btn btn-success" >{isEdit ? "Guardar Producto" : "Agregar Producto"}</button>
+                {/*Si estoy editando se muestra el boton de cancelar */}
                 {isEdit ? (<button type="button" className="btn btn-danger" onClick={cancelarEdicion}>Cancelar Edicion</button>) : ""}
 
               </div>

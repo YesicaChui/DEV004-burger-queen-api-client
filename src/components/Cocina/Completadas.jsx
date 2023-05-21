@@ -3,10 +3,13 @@ import { NavGestionCocina } from './NavGestionPedidos'
 import { httpObtenerPedidos } from '../../api/api'
 import moment from 'moment/moment';
 export const Completadas = ({token}) => {
+// arreglo de objetos de los pedidos
   const [pedidos, setPedidos] = useState([])
   async function leerPedidos() {
+    // peticion http para traer todos los pedidos
     setPedidos(await httpObtenerPedidos(token))
   }
+   //la primera vez que se llame al componente cargo los datos de los pedidos
   useEffect(() => {
     const leer = async () => {
       await leerPedidos();
@@ -14,10 +17,14 @@ export const Completadas = ({token}) => {
     leer();
   }, [])
 
+  // funcion para calcular la diferencia entre fechas en minutos
   function diferenciaFechasMinutos(dateEntry,dateProcessed){
+    // leo los datos de entrada en el formato deseado
     let fecha1 = moment(dateEntry, 'YYYY-MM-DD HH:mm:ss');
     let fecha2 = moment(dateProcessed, 'YYYY-MM-DD HH:mm:ss');
+    // calculo de la difencia en minutos
     let diff = fecha2.diff(fecha1, 'minutes');
+    // retorno la diferencia
     return diff
   }
   return (

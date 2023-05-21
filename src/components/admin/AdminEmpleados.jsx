@@ -2,64 +2,86 @@ import { useEffect, useState } from "react";
 import { NavAdmin } from "./NavAdmin"
 import { httpObtenerEmpleados, httpCrearEmpleado, httpEliminarEmpleado, httpActualizarEmpleado } from "../../api/api";
 export const AdminEmpleados = ({ token }) => {
-
+  // definicion de variable de estado
+  // arreglo de objetos de los empleados
   const [empleados, setEmpleados] = useState([])
+  // variable que define si estamos editando o no
   const [isEdit, setIsEdit] = useState(false)
+  // variable para indicar el id del empleado que estamos editando
   const [idEdit, setIdEdit] = useState("")
+  // variables de estado del empleado que se modificara
   const [correo, setCorreo] = useState("")
   const [rol, setRol] = useState("")
   const [contrasena, setContrasena] = useState("")
+
+  // funcion llamada por el evento submit al pulsar Agregar Empleado
   async function guardarEmpleado(e) {
+    // evita la recarga de la pagina - evita el comportamiento normal del evento
     e.preventDefault();
+    // si alguno de los 3 datos no tiene valor no se permite continuar
     if (!correo) return alert("Debe ingresar su correo")
     if (!contrasena) return alert("Debe ingresar una contraseña")
     if (!rol) return alert("Debe seleccionar un rol")
+    // creo el objeto usuario segun formato del api
     const usuario = {
       "email": correo,
       "password": contrasena,
       "role": rol
-    }
-    // si no estoy editando creo el empleado
+    }    
     if (!isEdit) {
+      // si no estoy editando creo el empleado
       await httpCrearEmpleado(token, usuario)
-      alert("Se inserto al empleado con exito")
-      //caso contrario actualizo el empleado
+      alert("Se inserto al empleado con exito")     
     } else {
+       //caso contrario actualizo el empleado
       await httpActualizarEmpleado(token, usuario, idEdit)
       alert("Se actualizo los datos del empleado con exito")
     }
+    // limpio los datos con la funcion cancelarEdicion()
     cancelarEdicion()
+    // vuelvo a leer a los empleados
     await leerEmpleados()
   }
-
+  
   async function leerEmpleados() {
+    // hago la peticion http y actulizo el arreglo de objetos de empleados
     setEmpleados(await httpObtenerEmpleados(token))
   }
 
   async function eliminarEmpleado(id) {
-    console.log(id)
+    // dialogo de confirmación si se pulso cancelar(retorna false) se ejecuta el return y ya no continua
     if (!confirm('¿Estás seguro de que deseas eliminar al empleado?')) return
-    const respuesta = await httpEliminarEmpleado(token, id)
-    console.log(`mirespuesta ${respuesta.status}`)
+    // peticion http para eliminar un empleado
+    await httpEliminarEmpleado(token, id)
+    // lee nuevamente a los empleados
     await leerEmpleados()
   }
 
-  async function activarEdicionEmpleado(id, correo, rol) {
+  // al activar Edición se visualiza el boton cancelar, 
+  // se visualiza el boton guardar y los datos del empleado se ponen en los inputs
+   async function activarEdicionEmpleado(id, correo, rol) {
+    // lo scrollea la pantalla a la parte superior
     scrollTo(0, 0);
+    // cambio estado de IsEdit a true para indicar que estoy editando
     setIsEdit(true)
     setIdEdit(id)
     setCorreo(correo)
     setRol(rol)
   }
 
+  // desactiva el boton cancelar y vuelve como al inicio y limpia los inputs
   function cancelarEdicion() {
+    // cambio estado de IsEdit a false para indicar que no estoy editando
     setIsEdit(false)
+    // limpio los inputs
     setCorreo("")
     setRol("")
     setContrasena("")
   }
 
   //la primera vez que se llame al componente cargo los datos de los empleados
+  // How to use async function in useEffect?
+  // https://dev.to/jasmin/how-to-use-async-function-in-useeffect-5efc
   useEffect(() => {
     const leer = async () => {
       await leerEmpleados();
@@ -72,6 +94,7 @@ export const AdminEmpleados = ({ token }) => {
     <>
       <NavAdmin />
       <section className="container p-3">
+        {/* Si estamos editando se muestra Guardar Empleado sino se muestra el texto Agregar Empleado*/}
         <h2 className="text-center mb-4">{isEdit ? "Guardar Empleado" : "Agregar Empleados"} </h2>
         <div className="row">
           <div className="col-lg-6 mx-auto">
@@ -84,6 +107,7 @@ export const AdminEmpleados = ({ token }) => {
                   className="form-control"
                   name="Correo"
                   value={correo}
+                  // actualizo la variable de estado correo cuando cambie el texto
                   onChange={(e) => setCorreo(e.target.value)}
                 />
               </div>
@@ -102,6 +126,7 @@ export const AdminEmpleados = ({ token }) => {
               </div>
               <div className="d-grid">
                 <button type="submit" className="btn btn-success" >{isEdit ? "Guardar Empleado" : "Agregar Empleado"}</button>
+                {/*Si estoy editando se muestra el boton de cancelar */}
                 {isEdit ? (<button type="button" className="btn btn-danger" onClick={cancelarEdicion}>Cancelar Edicion</button>) : ""}
 
               </div>
@@ -120,6 +145,7 @@ export const AdminEmpleados = ({ token }) => {
                 </tr>
               </thead>
               <tbody>
+                {/* recorriendo todos los empleados y mostrando en cada fila con los datos respectivos de cada empleado*/}
                 {empleados?.map((empleado) => (
                   <tr key={empleado.id}>
                     <td>{empleado.email}</td>
@@ -130,7 +156,6 @@ export const AdminEmpleados = ({ token }) => {
                     </td>
                   </tr>
                 ))}
-
               </tbody>
             </table>
           </div>

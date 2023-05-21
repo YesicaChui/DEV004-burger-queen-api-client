@@ -5,40 +5,48 @@ import { ProductoForm } from "./ProductoForm";
 
 export const AdminProductos = ({ token }) => {
 
+  // arreglo de objetos de los Productros
   const [productos, setProductos] = useState([])
+  // objeto que representa a un producto
   const [producto, setProducto] = useState(null)
- const [isEdit, setIsEdit] = useState(false)
+  // variable que representa si estamos editando o no
+  const [isEdit, setIsEdit] = useState(false)
+  // funciones usadas para el formulario
   const formFunciones = { leerProductos, cancelarEdicion, setProducto, token };
 
   async function leerProductos() {
+    // peticion http para traer todos los productos
     setProductos(await httpObtenerProductos(token))
   }
 
   async function eliminarProducto(id) {
-    console.log(id)
+    // dialogo de confirmación si se pulso cancelar(retorna false) se ejecuta el return y ya no continua
     if (!confirm('¿Estás seguro de que deseas eliminar el producto?')) return
+    // peticion http para eliminar un producto
     const respuesta = await httpEliminarProducto(token, id)
-    console.log(`mirespuesta ${respuesta.status}`)
+    // lee nuevamente a los productos
     await leerProductos()
   }
 
   async function activarEdicionProducto(idEdit, nombre, precio, imagen, tipo) {
+        // lo scrollea la pantalla a la parte superior
     scrollTo(0, 0);
+    // actualizo el objeto producto con los datos del elemento seleccionado
     setProducto({ idEdit, nombre, precio, imagen, tipo })
+     // cambio estado de IsEdit a true para indicar que estoy editando
     setIsEdit(true)
   }
 
   function cancelarEdicion() {
+    // cambio estado de IsEdit a false para indicar que no estoy editando
     setIsEdit(false)
-    setProducto(null)
-    console.log("se ejecuto el cancelarEdicion")
+    // limpio el objeto producto
+    setProducto(null)    
   }
-  console.log(producto)
-  console.log("valor de producto")
   //la primera vez que se llame al componente cargo los datos de los empleados
   // How to use async function in useEffect?
   // https://dev.to/jasmin/how-to-use-async-function-in-useeffect-5efc
-   // useEffect(() => leerProductos() , [])
+  // useEffect(() => leerProductos() , [])
   useEffect(() => {
     const leer = async () => {
       await leerProductos();
@@ -66,6 +74,7 @@ export const AdminProductos = ({ token }) => {
                 </tr>
               </thead>
               <tbody>
+                {/* recorriendo todos los productos y mostrando en cada fila con los datos respectivos de cada producto */}
                 {productos?.map((producto) => (
                   <tr key={producto.id}>
                     <td>{producto.name}</td>

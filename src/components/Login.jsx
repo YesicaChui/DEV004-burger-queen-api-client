@@ -16,6 +16,7 @@ export const Login = ({ actualizarToken }) => {
       const data = await httpLogin(usuario, contrasena)
       // si estoy logeado actualizo el token
       actualizarToken(data.accessToken)
+      // según el rol del usuario navego a su ruta
       if (data.user.role === 'admin') return navigate('/admin/empleados');
       if (data.user.role === 'chef') return navigate('/cocina/pendientes');
       if (data.user.role === 'waiter') return navigate('/mozo/pedidos');
@@ -23,8 +24,9 @@ export const Login = ({ actualizarToken }) => {
       alert("Email o contraseña incorrectos Verifique porfavor")
     }
   }
-  
+
   // añadido para que cuando se llame a salir de cualquier nav limpie el token y no pueda usar las rutas nuevamente
+  // me sirve para limpiar el token cuando se pulse salir
   useEffect(() => actualizarToken(""), [])
 
   return (
@@ -40,6 +42,7 @@ export const Login = ({ actualizarToken }) => {
               className="form-control"
               placeholder="Correo de Usuario"
               value={usuario}
+              // actualizando variable de estado usuario cuando escribo
               onChange={(e) => setUsuario(e.target.value)}
             />
           </div>
@@ -50,6 +53,7 @@ export const Login = ({ actualizarToken }) => {
               type="password"
               className="form-control"
               value={contrasena}
+              // actualizando variable de estado contrasena cuando escribo
               onChange={(e) => setContrasena(e.target.value)}
             />
           </div>
