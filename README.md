@@ -10,7 +10,8 @@
 * [6. Implementación de Interfaces](#6-implementación-de-interfaces)
 * [7. Test Unitarios y Asincronos](#7-test-unitarios-y-asincronos)
 * [8. Despliegue](#8-despliegue)
-* [7. Pistas / tips](#7-pistas--tips)
+* [9. Cómo usar](#9-cómo-usar)
+* [10. Referencias](#10-referencias)
 
 ***
 
