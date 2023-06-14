@@ -1,7 +1,8 @@
 import axios from "axios";
 // const dominiolocal = 'http://localhost:8080'
-const dominio = 'https://burger-queen-api-mock-production-7906.up.railway.app'
-
+// api mock
+// const dominio = 'https://burger-queen-api-mock-production-7906.up.railway.app'
+const dominio = ' https://yesica-burgerqueenapi.up.railway.app'
 export async function httpLogin(usuario, contrasena) {
   try {
     const response = await axios.post(`${dominio}/login`,
@@ -18,6 +19,7 @@ export async function httpLogin(usuario, contrasena) {
     // devuelvo la data si todo va bien
     return response.data;
   } catch (error) {
+    console.log(error)
     return "error";
   }
 }
