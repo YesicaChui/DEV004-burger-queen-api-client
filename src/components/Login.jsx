@@ -35,7 +35,7 @@ export const Login = ({ actualizarToken }) => {
         <form className="p-5 rounded shadow-lg bg-light">
           <h1 className="text-center mb-4">Burger Queen Login</h1>
           <div className="mb-3">
-            <label htmlFor="inputUsuario" className="form-label">Correo de Usuario</label>
+            <label htmlFor="inputUsuario" className="form-label">Email de Usuario</label>
             <input
               id="inputUsuario"
               type="text"
