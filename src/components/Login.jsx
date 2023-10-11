@@ -40,14 +40,14 @@ export const Login = ({ actualizarToken }) => {
               id="inputUsuario"
               type="text"
               className="form-control"
-              placeholder="Correo de Usuario"
+              placeholder="Email de Usuario"
               value={usuario}
               // actualizando variable de estado usuario cuando escribo
               onChange={(e) => setUsuario(e.target.value)}
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="inputPassword" className="form-label">Contraseña</label>
+            <label htmlFor="inputPassword" className="form-label">Password</label>
             <input
               id="inputPassword"
               type="password"
