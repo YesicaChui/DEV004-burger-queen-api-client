@@ -3,7 +3,7 @@ import axios from "axios";
 // api mock
 // const dominio = 'https://burger-queen-api-mock-production-7906.up.railway.app'
 // const dominio = ' https://yesica-burgerqueenapi.up.railway.app'
-const dominio = 'http://165.227.206.236:3002'
+const dominio = 'https://yesica-chui-chalco.xyz/app2/'
 export async function httpLogin(usuario, contrasena) {
   try {
     const response = await axios.post(`${dominio}/login`,
