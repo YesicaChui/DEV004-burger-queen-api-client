@@ -33,7 +33,7 @@ export const Login = ({ actualizarToken }) => {
     <>
       <div className="d-flex justify-content-center align-items-center vh-100 bg-dark">
         <form className="p-5 rounded shadow-lg bg-light">
-          <h1 className="text-center mb-4">Burger Queen Login</h1>
+          <h1 className="text-center mb-4">Burger Queen Acceso</h1>
           <div className="mb-3">
             <label htmlFor="inputUsuario" className="form-label">Email de Usuario</label>
             <input
