@@ -238,6 +238,11 @@ Realizar los test
 
 ` $ yarn test`
 
+Para probar la aplicación
+* Para el mozo
+luisito@gmail.com clave 123456
+* Para la cocina
+franco@gmail.com clave 123456
 
 ## 10. Referencias
 
